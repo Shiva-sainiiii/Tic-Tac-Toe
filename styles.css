@@ -144,8 +144,8 @@ flex-wrap:nowrap;
  justify-content:center;
  background-size:cover;
   white-space:nowrap;
-   background-color:black;
- background-image:url("winn.jpg");
+  
+ background-image:url("Winn.jpg");
  position:fixed;
 z-index:6;
 
