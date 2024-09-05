@@ -40,4 +40,4 @@ Have questions or feedback? Reach out to us at [insert contact info].
 
 *Let's Play!* 🎉
 
-Open index.html to start playing!
+https://shiva-sainiiii.github.io/Tic-Tac-Toe/
