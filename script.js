@@ -1,7 +1,6 @@
 
 
 
-
 // constant and variables defination
 var cont = document.querySelector('#container');
 const boxes = document.querySelectorAll('.box');
