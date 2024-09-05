@@ -66,8 +66,10 @@ font-weight: 800;
 font-style: normal;
 top:13vh;}
 
+
 #admin{position:fixed;
 top:22vh;
+font-family: "Ga Maamli", sans-serif;
 right:10vh;
 color:white;}
 
@@ -79,6 +81,7 @@ border-radius:20px;
 height:8vh;
 background-size:cover;
 color:white;
+
 font-family: "Pixelify Sans", sans-serif;
   font-optical-sizing: auto;
   font-weight: bold;
@@ -101,22 +104,65 @@ align-items:center;
 
 
 #start video {
-            width: 100vw;
-            height: 100vh;
-            object-fit:cover;
-        
-        
-        
+object-fit:cover
+
+mix-blend-mode:screen;
+
       }
       
       
  #start a {
+ 
  border: 1px solid white;
  padding:1vh;
  border-radius:50%;
  position:fixed;
  color:white;
+ 
  text-decoration:none;
  top:1vh;
  right:1vh;
  }
+ 
+ 
+ #winceleb{
+ width:0vw;
+ over-flow:hidden;
+ height:0vh;
+box-shadow:0px 0px 50px 1px WHITE;
+ border-radius:30px;
+ color:white;
+ display:flex;
+flex-wrap:nowrap;
+ align-items:center;
+ justify-content:center;
+ background-size:cover;
+  white-space:nowrap;
+ background-image:url("winn.jpg");
+ position:fixed;
+
+
+
+ }
+ 
+
+
+#winceleb h1{
+
+
+  font-optical-sizing: auto;
+  font-weight: bold;
+  font-style: normal;
+font-size:3.5vh;
+font-family: "Trade Winds", system-ui;
+scale: 0.5;
+
+ transition:all ease-in-out 3s;
+
+}
+
+#newvdieo{
+position:fixed;
+left:0;
+
+}

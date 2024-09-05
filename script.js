@@ -37,6 +37,9 @@ boxes.forEach(function(box) {
   });
 });
 
+
+var winner = document.querySelector("#winceleb h1");
+var winCeleb = document.querySelector("#winceleb");
 function checkWinner() {
   const winningCombinations = [
     [0, 1, 2],
@@ -52,17 +55,29 @@ function checkWinner() {
     const [a, b, c] = winningCombinations[i];
     if (boxes[a].innerHTML === boxes[b].innerHTML && boxes[a].innerHTML === boxes[c].innerHTML && boxes[a].innerHTML !== "") {
       winningSound.play();
+ 
+      winCeleb.style.width= "85vw";
+      winCeleb.style.height= "50vh";
+     winner.innerHTML="winner is " + boxes[a].innerHTML;
+     winner.style.scale="1.5";
+      
       boxes[a].style.color = "yellow";
       boxes[b].style.color = "yellow";
       boxes[c].style.color = "yellow";
       gameOver = true;
       setTimeout(function() {
+      winCeleb.style.width= "0vw";
+      winCeleb.style.height= "0vh";
+
+      winner.innerHTML="";
+     winner.style.scale="0";
         resetGame();
       }, 5000);
     }
   }
   if (moves === 9 && !gameOver) {
     setTimeout(function() {
+
       resetGame();
     }, 2000);
   }
