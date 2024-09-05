@@ -3,7 +3,7 @@
 
 
 
-
+var cont = document.querySelector('#container');
 
 const boxes = document.querySelectorAll('.box');
 var flag = 1;
@@ -57,7 +57,7 @@ function checkWinner() {
       winningSound.play();
  
       winCeleb.style.width= "85vw";
-      winCeleb.style.height= "50vh";
+      winCeleb.style.height= "45vh";
      winner.innerHTML="winner is " + boxes[a].innerHTML;
      winner.style.scale="1.5";
       
@@ -93,7 +93,8 @@ function resetGame() {
   moves = 0;
 }
 
-document.querySelector("#hero button").addEventListener("click", function() {
+var herobtn = document.querySelector("#hero button");
+herobtn.addEventListener("click", function() {
   const resetSound = new Audio('restart.mp3');
   resetSound.play();
   resetGame();
@@ -103,28 +104,16 @@ document.querySelector("#hero button").addEventListener("click", function() {
 
 var a = document.querySelector("#start a");
 var startpage = document.querySelector("#start");
-document.querySelector("#start button").addEventListener("click", function() {
-  startpage.innerHTML = " ";
-  startpage.style.width = "0";
-  startpage.style.height = "0";
+var btnn = document.querySelector("#start button");
+
+btnn.addEventListener("click", function() {
+  startpage.style.opacity= "0";
+cont.style.zIndex="5";
+herobtn.style.zIndex="5";
+bgsound.play();
+bgsound.loop = true;
   enterSound.play();
+  btnn.style.width="0";
+  btnn.innerHTML="";
 });
-
-var flag = 1;
-document.querySelector("#i").addEventListener("click",function(){
-if(flag == 1){
-bgsound.play();
-bgsound.loop = true;
-bgsound.volume = 0.3;
-a.innerHTML = '<i class="fa-solid fa-volume-high id="i"></i>';
-flag = 0;}
-else{
-bgsound.play();
-bgsound.loop = true;
-bgsound.volume = 0;
-a.innerHTML = '<i class="fa-solid fa-volume-xmark" id="i"></i>';
-flag = 1;
-}
-})
-
 
