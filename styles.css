@@ -12,6 +12,7 @@ height:100%;
 
 #hero{width:100vw;
 height:100vh;
+
 display:flex;
 align-items:center;
 justify-content:center;
@@ -86,3 +87,36 @@ font-size:3.5vh;
 background-image:url("button.png");
 bottom:10vh;}
 
+
+
+#start{
+width:100vw;
+height:100vh;
+position:fixed;
+
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+
+#start video {
+            width: 100vw;
+            height: 100vh;
+            object-fit:cover;
+        
+        
+        
+      }
+      
+      
+ #start a {
+ border: 1px solid white;
+ padding:1vh;
+ border-radius:50%;
+ position:fixed;
+ color:white;
+ text-decoration:none;
+ top:1vh;
+ right:1vh;
+ }
