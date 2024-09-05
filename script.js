@@ -2,9 +2,8 @@
 
 
 
-
+// constant and variables defination
 var cont = document.querySelector('#container');
-
 const boxes = document.querySelectorAll('.box');
 var flag = 1;
 var gameOver = false;
@@ -18,7 +17,7 @@ const bgsound = new Audio('bgmusic.mp3');
 
 
 
-
+// user turns and their O and X 
 
 boxes.forEach(function(box) {
   box.addEventListener('click', function() {
@@ -38,6 +37,7 @@ boxes.forEach(function(box) {
 });
 
 
+// winning possibility and win celebration
 var winner = document.querySelector("#winceleb h1");
 var winCeleb = document.querySelector("#winceleb");
 function checkWinner() {
@@ -83,6 +83,8 @@ function checkWinner() {
   }
 }
 
+
+// function for reset game 
 function resetGame() {
   boxes.forEach(function(box) {
     box.innerHTML = "";
@@ -101,7 +103,7 @@ herobtn.addEventListener("click", function() {
 });
 
 
-
+// game start functionality
 var a = document.querySelector("#start a");
 var startpage = document.querySelector("#start");
 var btnn = document.querySelector("#start button");
@@ -110,10 +112,28 @@ btnn.addEventListener("click", function() {
   startpage.style.opacity= "0";
 cont.style.zIndex="5";
 herobtn.style.zIndex="5";
-bgsound.play();
-bgsound.loop = true;
+
+
   enterSound.play();
   btnn.style.width="0";
   btnn.innerHTML="";
 });
 
+
+var random = 0;
+a.addEventListener("click",function(){
+if(random == 0){
+a.innerHTML = '<i class="fa-solid fa-volume-high"></i>';
+random = 1;
+bgsound.play();
+bgsound.loop = true;
+}
+else{
+a.innerHTML = '<i class="fa-solid fa-volume-xmark"></i>';
+random = 0;
+bgsound.pause();
+bgsound.loop = true;
+
+}
+
+});
