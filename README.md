@@ -1,6 +1,11 @@
 
 *Tic-Tac-Toe Game* 🎮
 
+
+![Game LayOut](ss1.jpg)
+
+![Game LayOut](ss2.jpg)
+
 *A Classic Game Revived* 🔥
 
 Play the timeless game of Tic-Tac-Toe with a modern twist! This JavaScript implementation brings the classic game to life with sleek visuals, sound effects, and a seamless user experience.
