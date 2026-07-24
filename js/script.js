@@ -19,6 +19,12 @@ const state = {
   aiSymbol: "X",
 };
 
+const score = {
+  o: 0,
+  x: 0,
+  draw: 0,
+};
+
 // ---- DOM refs ----
 const cells = document.querySelectorAll(".cell");
 const turnSymbolEl = document.getElementById("turn-symbol");
@@ -37,6 +43,13 @@ const difficultyButtons = document.querySelectorAll(".diff-btn");
 
 const gameScreen = document.getElementById("game-screen");
 const changeModeBtn = document.getElementById("change-mode-btn");
+
+const scoreOEl = document.getElementById("score-o");
+const scoreXEl = document.getElementById("score-x");
+const scoreDrawEl = document.getElementById("score-draw");
+const scoreLabelOEl = document.getElementById("score-label-o");
+const scoreLabelXEl = document.getElementById("score-label-x");
+const resetScoreBtn = document.getElementById("reset-score-btn");
 
 // ---- Sounds ----
 const sounds = {
@@ -135,10 +148,10 @@ function getAiMove() {
 
   for (const i of empty) {
     state.board[i] = state.aiSymbol;
-    const score = minimax(state.board, 0, false);
+    const moveScore = minimax(state.board, 0, false);
     state.board[i] = "";
-    if (score > bestScore) {
-      bestScore = score;
+    if (moveScore > bestScore) {
+      bestScore = moveScore;
       bestMove = i;
     }
   }
@@ -189,6 +202,10 @@ function declareWinner(symbol, combo) {
 
   combo.forEach((i) => cells[i].classList.add("win-line"));
 
+  if (symbol === "O") score.o++;
+  else score.x++;
+  renderScore();
+
   resultText.textContent = `${symbol} claims this soul`;
   resultOverlay.classList.add("show");
 
@@ -197,10 +214,36 @@ function declareWinner(symbol, combo) {
 
 function declareDraw() {
   state.gameOver = true;
+  score.draw++;
+  renderScore();
+
   resultText.textContent = "The board is silent";
   resultOverlay.classList.add("show");
 
   setTimeout(resetGame, 2400);
+}
+
+function renderScore() {
+  scoreOEl.textContent = score.o;
+  scoreXEl.textContent = score.x;
+  scoreDrawEl.textContent = score.draw;
+}
+
+function updateScoreLabels() {
+  if (state.mode === "ai") {
+    scoreLabelOEl.textContent = "You";
+    scoreLabelXEl.textContent = "Entity";
+  } else {
+    scoreLabelOEl.textContent = "O";
+    scoreLabelXEl.textContent = "X";
+  }
+}
+
+function resetScore() {
+  score.o = 0;
+  score.x = 0;
+  score.draw = 0;
+  renderScore();
 }
 
 function resetGame() {
@@ -231,8 +274,14 @@ restartBtn.addEventListener("click", () => {
   resetGame();
 });
 
+resetScoreBtn.addEventListener("click", () => {
+  if (!muted) sounds.restart.play();
+  resetScore();
+});
+
 changeModeBtn.addEventListener("click", () => {
   resetGame();
+  resetScore();
   gameScreen.classList.add("hidden");
   difficultyRow.classList.add("hidden");
   modeScreen.classList.remove("hidden");
@@ -267,6 +316,7 @@ difficultyButtons.forEach((btn) => {
 function beginGame() {
   modeScreen.classList.add("hidden");
   gameScreen.classList.remove("hidden");
+  updateScoreLabels();
   resetGame();
 }
 
