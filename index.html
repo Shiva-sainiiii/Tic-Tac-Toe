@@ -58,6 +58,21 @@
 
   <p id="turn-indicator" class="turn-indicator">Turn: <span id="turn-symbol">O</span></p>
 
+  <div id="scoreboard" class="scoreboard">
+    <div class="score-item">
+      <span id="score-label-o" class="score-label">O</span>
+      <span id="score-o" class="score-value">0</span>
+    </div>
+    <div class="score-item">
+      <span class="score-label">Draws</span>
+      <span id="score-draw" class="score-value">0</span>
+    </div>
+    <div class="score-item">
+      <span id="score-label-x" class="score-label">X</span>
+      <span id="score-x" class="score-value">0</span>
+    </div>
+  </div>
+
   <div id="board">
     <button class="cell" data-index="0"></button>
     <button class="cell" data-index="1"></button>
@@ -72,6 +87,7 @@
 
   <div class="game-actions">
     <button id="restart-btn" class="btn-stone">Restart</button>
+    <button id="reset-score-btn" class="btn-stone">Reset Score</button>
     <button id="change-mode-btn" class="btn-stone">Change Mode</button>
   </div>
 </main>
