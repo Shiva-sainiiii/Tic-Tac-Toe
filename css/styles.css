@@ -1,1 +1,290 @@
+/* ============================
+   Whisper — Horror Tic Tac Toe
+   Design tokens
+============================ */
+:root {
+  --bg-void: #0a0908;
+  --bg-panel: #1a1614;
+  --blood: #8b0000;
+  --blood-deep: #3d0000;
+  --bone: #c9c2b8;
+  --bone-dim: #7a746c;
+  --glow: rgba(139, 0, 0, 0.55);
 
+  --font-display: "Nosifer", system-ui, sans-serif;
+  --font-body: "JetBrains Mono", monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  background: var(--bg-void);
+  overflow: hidden;
+  font-family: var(--font-body);
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* ============================
+   Shared: title & flicker
+============================ */
+.game-title {
+  font-family: var(--font-display);
+  color: var(--bone);
+  font-size: clamp(2.4rem, 10vw, 4.5rem);
+  text-align: center;
+  text-shadow: 0 0 12px var(--glow), 0 0 40px var(--blood-deep);
+  letter-spacing: 0.05em;
+}
+
+.game-title.small {
+  font-size: clamp(1.4rem, 6vw, 2rem);
+}
+
+.game-subtitle {
+  text-align: center;
+  color: var(--bone-dim);
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-top: 0.5rem;
+}
+
+@keyframes flicker {
+  0%, 19%, 21%, 23%, 100% { opacity: 1; }
+  20%, 22% { opacity: 0.35; }
+  50% { opacity: 1; }
+  52% { opacity: 0.6; }
+  53% { opacity: 1; }
+}
+
+.flicker {
+  animation: flicker 6s infinite;
+}
+
+/* ============================
+   Reusable stone button
+============================ */
+.btn-stone {
+  border: 1px solid #3a332e;
+  border-radius: 6px;
+  background:
+    linear-gradient(180deg, rgba(0,0,0,0.2), rgba(0,0,0,0.5)),
+    var(--bg-panel);
+  color: var(--bone);
+  padding: 0.9rem 1.8rem;
+  font-family: var(--font-body);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.95rem;
+  box-shadow: 0 0 25px rgba(0,0,0,0.6), inset 0 0 15px rgba(0,0,0,0.4);
+  transition: all 0.25s ease;
+}
+
+.btn-stone:hover {
+  color: #fff;
+  border-color: var(--blood);
+  box-shadow: 0 0 20px var(--glow), inset 0 0 15px rgba(0,0,0,0.4);
+}
+
+/* ============================
+   Start screen
+============================ */
+#start-screen {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: opacity 1.2s ease;
+}
+
+#start-screen.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+#bg-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(0.4) brightness(0.5);
+}
+
+.fog-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 0%, var(--bg-void) 85%);
+}
+
+.start-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem;
+  padding: 0 1.5rem;
+  text-align: center;
+}
+
+#mute-toggle {
+  position: fixed;
+  top: 1.2rem;
+  right: 1.2rem;
+  z-index: 3;
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 50%;
+  border: 1px solid var(--bone-dim);
+  background: rgba(10, 9, 8, 0.6);
+  color: var(--bone);
+}
+
+/* ============================
+   Game screen
+============================ */
+#game-screen {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 2rem 1rem;
+  background:
+    radial-gradient(ellipse at top, #1a1614 0%, var(--bg-void) 70%);
+}
+
+.game-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.turn-indicator {
+  color: var(--bone-dim);
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+#turn-symbol {
+  color: var(--blood);
+  font-weight: 700;
+}
+
+/* ============================
+   Board
+============================ */
+#board {
+  width: min(85vw, 360px);
+  height: min(85vw, 360px);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 4px;
+  background: #000;
+  border-radius: 12px;
+  padding: 4px;
+  box-shadow: 0 0 60px rgba(0,0,0,0.7), 0 0 30px var(--blood-deep);
+}
+
+.cell {
+  background:
+    linear-gradient(160deg, #221d1a, #14100e);
+  border: none;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(2rem, 9vw, 3.2rem);
+  font-family: var(--font-display);
+  color: transparent;
+  transition: background 0.2s ease, box-shadow 0.3s ease;
+}
+
+.cell:not(:disabled):hover {
+  background: linear-gradient(160deg, #2b2420, #181310);
+}
+
+.cell.mark-o {
+  color: var(--blood);
+  text-shadow: 0 0 14px var(--glow);
+}
+
+.cell.mark-x {
+  color: var(--bone);
+  text-shadow: 0 0 10px rgba(201, 194, 184, 0.4);
+}
+
+.cell.win-line {
+  animation: bleed 1s ease-in-out infinite alternate;
+}
+
+@keyframes bleed {
+  from { box-shadow: inset 0 0 10px var(--glow); }
+  to   { box-shadow: inset 0 0 35px var(--blood); }
+}
+
+/* ============================
+   Result overlay
+============================ */
+#result-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0);
+  pointer-events: none;
+  transition: background 0.6s ease;
+}
+
+#result-overlay.show {
+  background: rgba(0,0,0,0.75);
+  pointer-events: auto;
+}
+
+#result-text {
+  font-family: var(--font-display);
+  color: var(--blood);
+  font-size: clamp(1.6rem, 8vw, 3rem);
+  text-align: center;
+  text-shadow: 0 0 20px var(--glow);
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.6s ease;
+}
+
+#result-overlay.show #result-text {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ============================
+   Responsive
+============================ */
+@media (max-width: 400px) {
+  .btn-stone { padding: 0.75rem 1.4rem; font-size: 0.85rem; }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .flicker, .cell.win-line { animation: none; }
+}
