@@ -264,6 +264,45 @@ button {
 }
 
 /* ============================
+   Scoreboard
+============================ */
+.scoreboard {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 0.6rem 1.2rem;
+  border: 1px solid #3a332e;
+  border-radius: 8px;
+  background: rgba(26, 22, 20, 0.6);
+  box-shadow: inset 0 0 12px rgba(0,0,0,0.5);
+}
+
+.score-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 3.2rem;
+}
+
+.score-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--bone-dim);
+}
+
+.score-value {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--bone);
+  text-shadow: 0 0 8px var(--glow);
+}
+
+.score-item:first-child .score-value {
+  color: var(--blood);
+}
+
+/* ============================
    Board
 ============================ */
 #board {
