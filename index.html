@@ -3,73 +3,64 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tic Tac Toe</title>
+<title>Whisper — A Horror Tic Tac Toe</title>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Ga+Maamli&family=Trade+Winds&display=swap" rel="stylesheet">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Ga+Maamli&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nosifer&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet"><link rel="stylesheet" href="styles.css">
+
+<link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-<div id="main">
 
+<!-- START SCREEN -->
+<section id="start-screen">
+  <video autoplay loop muted playsinline id="bg-video">
+    <source src="assets/video/bgvideo.mp4" type="video/mp4">
+  </video>
+  <div class="fog-overlay"></div>
 
-<div id="hero">
+  <button id="mute-toggle" aria-label="Toggle sound">
+    <i class="fa-solid fa-volume-xmark"></i>
+  </button>
 
-<div id="winceleb">
-<h1> </h1></div>
+  <div class="start-content">
+    <h1 class="game-title flicker">Whisper</h1>
+    <p class="game-subtitle">a tic tac toe haunting &mdash; by Shiva Saini</p>
+    <button id="start-btn" class="btn-stone">Enter, If You Dare</button>
+  </div>
+</section>
 
-<h1 id="title">Tic Tac Toe</h1>
-<h5 id="admin">-by Shiva Saini</h5>
+<!-- GAME SCREEN -->
+<main id="game-screen">
+  <header class="game-header">
+    <h1 class="game-title flicker small">Whisper</h1>
+    <p class="game-subtitle">by Shiva Saini</p>
+  </header>
 
-<div id="container">
-<div class="box top left"></div>
-<div class="box top"></div>
-<div class="box top right"></div>
+  <p id="turn-indicator" class="turn-indicator">Turn: <span id="turn-symbol">O</span></p>
 
-<div class="box left"></div>
-<div class="box"></div>
-<div class="box right"></div>
+  <div id="board">
+    <button class="cell" data-index="0"></button>
+    <button class="cell" data-index="1"></button>
+    <button class="cell" data-index="2"></button>
+    <button class="cell" data-index="3"></button>
+    <button class="cell" data-index="4"></button>
+    <button class="cell" data-index="5"></button>
+    <button class="cell" data-index="6"></button>
+    <button class="cell" data-index="7"></button>
+    <button class="cell" data-index="8"></button>
+  </div>
 
-<div class="box bottom left"></div>
-<div class="box bottom"></div>
-<div class="box bottom right"></div>
+  <button id="restart-btn" class="btn-stone">Restart</button>
+</main>
+
+<!-- WIN / DRAW OVERLAY -->
+<div id="result-overlay">
+  <h1 id="result-text"></h1>
 </div>
 
-<button>Restart</button>
-
-<div id="start">
-<h1 id="title">Tic Tac Toe</h1>
-<h5 id="admin">-by Shiva Saini</h5>
-<video autoplay loop muted>
-       <source src="bgvideo.mp4" type="video/mp4">
-       Your browser does not support the video tag.
-   </video>
-<a>
-<i class="fa-solid fa-volume-xmark"></i>
-</a>
-<button style="width: 60vw;
-height:10vh; top:50%;" id="hhhh">Start Match</button>
-</div>
-
-
-
-
-</div>
-
-
-</div>
-<script type="text/javascript" src="script.js"></script>
+<script type="text/javascript" src="js/script.js"></script>
 </body>
 </html>

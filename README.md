@@ -1,48 +1,74 @@
+# Whisper — A Horror Tic Tac Toe 🕯️
 
-*Tic-Tac-Toe Game* 🎮
+A classic Tic-Tac-Toe, reimagined with a horror atmosphere: flickering
+title, blood-red vs bone-white marks, ambient sound, and a board that
+bleeds when someone wins.
 
+Live: https://shiva-sainiiii.github.io/Tic-Tac-Toe/
+*(update this link once the Vercel deploy is live)*
 
-![Game LayOut](ss1.jpg)
+## Preview
 
-![Game LayOut](ss2.jpg)
+![Start screen](ss1.jpg)
+![Board mid-game](ss2.jpg)
 
-*A Classic Game Revived* 🔥
+## Features
 
-Play the timeless game of Tic-Tac-Toe with a modern twist! This JavaScript implementation brings the classic game to life with sleek visuals, sound effects, and a seamless user experience.
+- Two-player local play, alternating turns (O goes first)
+- Win detection with an animated "bleeding" win line
+- Draw detection with its own message
+- Auto-reset after a win or draw
+- Ambient sound effects with a mute toggle
+- Fully responsive, works down to small phone screens
+- Respects `prefers-reduced-motion` for accessibility
 
-*Features* 🎯
+## Tech stack
 
-- Two-player game with alternating turns
-- Win detection and notification
-- Reset button and auto-reset after 5 seconds of inactivity
-- Sound effects for moves and wins
+- HTML5
+- CSS3 (custom properties / design tokens, grid layout, animations)
+- Vanilla JavaScript (no framework, no build step)
 
-*Technologies Used* 💻
+## Project structure
 
-- JavaScript for game logic and event handling
-- HTML for game structure and layout
-- CSS for styling and visual effects
-- Audio files for sound effects
+```
+horror-tic-tac-toe/
+├── index.html
+├── css/
+│   └── styles.css
+├── js/
+│   └── script.js
+├── assets/
+│   ├── images/
+│   ├── audio/
+│   └── video/
+└── README.md
+```
 
-*How to Play* 🤔
+## Running locally
 
-1. Open the game in a web browser
-2. Player 1 (O) makes the first move by clicking on an empty square
-3. Player 2 (X) makes their move by clicking on an empty square
-4. Players alternate turns until one player wins or the game is reset
+No build step needed — just open `index.html` in a browser, or serve
+the folder with any static server:
 
-*Contribute* 🤝
+```bash
+npx serve .
+```
 
-Fork and modify the game to add new features or improve existing ones! We welcome contributions from developers of all skill levels.
+## Roadmap
 
-*License* 📝
+- [ ] Deploy to Vercel
+- [ ] Add a single-player mode (vs. a simple AI)
+- [ ] Add score tracking across rounds
+- [ ] Custom cursor / hover states for extra atmosphere
 
-This project is licensed under the MIT License. See LICENSE for details.
+## Contributing
 
-*Get in Touch* 📲
+Forks and PRs welcome — this is an ongoing personal project I keep
+improving as I learn.
 
-Have questions or feedback? Reach out to us at [insert contact info].
+## License
 
-*Let's Play!* 🎉
+MIT — see LICENSE for details.
 
-https://shiva-sainiiii.github.io/Tic-Tac-Toe/
+## Author
+
+Shiva Saini
