@@ -155,6 +155,69 @@ button {
 }
 
 /* ============================
+   Generic visibility utility
+   (start-screen keeps its own fade rule below, so it is excluded here)
+============================ */
+.hidden:not(#start-screen) {
+  display: none !important;
+}
+
+/* ============================
+   Mode select screen
+============================ */
+#mode-screen {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  background: radial-gradient(ellipse at center, #1a1614 0%, var(--bg-void) 75%);
+}
+
+.mode-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  padding: 0 1.5rem;
+  text-align: center;
+}
+
+.mode-title {
+  font-family: var(--font-display);
+  color: var(--bone);
+  font-size: clamp(1.4rem, 6vw, 2.2rem);
+  text-shadow: 0 0 12px var(--glow);
+  letter-spacing: 0.04em;
+}
+
+.mode-options {
+  display: flex;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.mode-btn,
+.diff-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  min-width: 9.5rem;
+}
+
+.mode-sub {
+  display: block;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: var(--bone-dim);
+  text-transform: none;
+  font-weight: 400;
+}
+
+/* ============================
    Game screen
 ============================ */
 #game-screen {
@@ -168,6 +231,18 @@ button {
   padding: 2rem 1rem;
   background:
     radial-gradient(ellipse at top, #1a1614 0%, var(--bg-void) 70%);
+}
+
+#game-screen.thinking #board {
+  pointer-events: none;
+  opacity: 0.85;
+}
+
+.game-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .game-header {
