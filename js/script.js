@@ -13,6 +13,10 @@ const state = {
   current: "O", // O goes first, matches original game
   moves: 0,
   gameOver: false,
+  mode: "pvp",       // "pvp" | "ai"
+  difficulty: "hard", // "easy" | "hard"
+  humanSymbol: "O",
+  aiSymbol: "X",
 };
 
 // ---- DOM refs ----
@@ -25,6 +29,14 @@ const resultText = document.getElementById("result-text");
 const startScreen = document.getElementById("start-screen");
 const startBtn = document.getElementById("start-btn");
 const muteToggle = document.getElementById("mute-toggle");
+
+const modeScreen = document.getElementById("mode-screen");
+const modeButtons = document.querySelectorAll(".mode-btn");
+const difficultyRow = document.getElementById("difficulty-row");
+const difficultyButtons = document.querySelectorAll(".diff-btn");
+
+const gameScreen = document.getElementById("game-screen");
+const changeModeBtn = document.getElementById("change-mode-btn");
 
 // ---- Sounds ----
 const sounds = {
@@ -46,7 +58,20 @@ function handleCellClick(e) {
   const index = Number(cell.dataset.index);
 
   if (state.board[index] !== "" || state.gameOver) return;
+  // In AI mode, block clicks when it's not the human's turn
+  if (state.mode === "ai" && state.current !== state.humanSymbol) return;
 
+  playMove(index);
+
+  if (state.gameOver) return;
+
+  if (state.mode === "ai" && state.current === state.aiSymbol) {
+    queueAiMove();
+  }
+}
+
+function playMove(index) {
+  const cell = cells[index];
   state.board[index] = state.current;
   cell.textContent = state.current;
   cell.classList.add(state.current === "O" ? "mark-o" : "mark-x");
@@ -59,6 +84,20 @@ function handleCellClick(e) {
   turnSymbolEl.textContent = state.current;
 
   checkResult();
+}
+
+function queueAiMove() {
+  gameScreen.classList.add("thinking");
+  const delay = 500 + Math.random() * 500; // feels like something is "deciding"
+  setTimeout(() => {
+    if (state.gameOver) {
+      gameScreen.classList.remove("thinking");
+      return;
+    }
+    const index = getAiMove();
+    gameScreen.classList.remove("thinking");
+    if (index !== -1) playMove(index);
+  }, delay);
 }
 
 function checkResult() {
@@ -74,6 +113,74 @@ function checkResult() {
   if (state.moves === 9) {
     declareDraw();
   }
+}
+
+// ============================
+// AI logic
+// ============================
+function getAiMove() {
+  const empty = state.board
+    .map((v, i) => (v === "" ? i : null))
+    .filter((v) => v !== null);
+
+  if (empty.length === 0) return -1;
+
+  if (state.difficulty === "easy") {
+    return empty[Math.floor(Math.random() * empty.length)];
+  }
+
+  // Hard: minimax, unbeatable
+  let bestScore = -Infinity;
+  let bestMove = empty[0];
+
+  for (const i of empty) {
+    state.board[i] = state.aiSymbol;
+    const score = minimax(state.board, 0, false);
+    state.board[i] = "";
+    if (score > bestScore) {
+      bestScore = score;
+      bestMove = i;
+    }
+  }
+  return bestMove;
+}
+
+function minimax(board, depth, isMaximizing) {
+  const winner = getBoardWinner(board);
+  if (winner === state.aiSymbol) return 10 - depth;
+  if (winner === state.humanSymbol) return depth - 10;
+  if (board.every((c) => c !== "")) return 0;
+
+  const empty = board
+    .map((v, i) => (v === "" ? i : null))
+    .filter((v) => v !== null);
+
+  if (isMaximizing) {
+    let best = -Infinity;
+    for (const i of empty) {
+      board[i] = state.aiSymbol;
+      best = Math.max(best, minimax(board, depth + 1, false));
+      board[i] = "";
+    }
+    return best;
+  } else {
+    let best = Infinity;
+    for (const i of empty) {
+      board[i] = state.humanSymbol;
+      best = Math.min(best, minimax(board, depth + 1, true));
+      board[i] = "";
+    }
+    return best;
+  }
+}
+
+function getBoardWinner(board) {
+  for (const [a, b, c] of WIN_COMBOS) {
+    if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+      return board[a];
+    }
+  }
+  return null;
 }
 
 function declareWinner(symbol, combo) {
@@ -111,6 +218,7 @@ function resetGame() {
   turnSymbolEl.textContent = "O";
   resultOverlay.classList.remove("show");
   resultText.textContent = "";
+  gameScreen.classList.remove("thinking");
 }
 
 // ============================
@@ -123,10 +231,44 @@ restartBtn.addEventListener("click", () => {
   resetGame();
 });
 
+changeModeBtn.addEventListener("click", () => {
+  resetGame();
+  gameScreen.classList.add("hidden");
+  difficultyRow.classList.add("hidden");
+  modeScreen.classList.remove("hidden");
+});
+
 startBtn.addEventListener("click", () => {
   startScreen.classList.add("hidden");
+  modeScreen.classList.remove("hidden");
   if (!muted) sounds.enter.play();
 });
+
+modeButtons.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    state.mode = btn.dataset.mode;
+
+    if (state.mode === "ai") {
+      difficultyRow.classList.remove("hidden");
+      return; // wait for difficulty pick before starting
+    }
+
+    beginGame();
+  });
+});
+
+difficultyButtons.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    state.difficulty = btn.dataset.difficulty;
+    beginGame();
+  });
+});
+
+function beginGame() {
+  modeScreen.classList.add("hidden");
+  gameScreen.classList.remove("hidden");
+  resetGame();
+}
 
 muteToggle.addEventListener("click", () => {
   muted = !muted;
