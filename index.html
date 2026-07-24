@@ -32,8 +32,25 @@
   </div>
 </section>
 
+<!-- MODE SELECT SCREEN -->
+<section id="mode-screen" class="hidden">
+  <div class="mode-content">
+    <h2 class="mode-title">Choose Your Fate</h2>
+
+    <div class="mode-options">
+      <button class="btn-stone mode-btn" data-mode="pvp">Two Souls<span class="mode-sub">Play a friend</span></button>
+      <button class="btn-stone mode-btn" data-mode="ai">Face the Entity<span class="mode-sub">Play vs AI</span></button>
+    </div>
+
+    <div id="difficulty-row" class="mode-options hidden">
+      <button class="btn-stone diff-btn" data-difficulty="easy">Restless<span class="mode-sub">Easy</span></button>
+      <button class="btn-stone diff-btn" data-difficulty="hard">Merciless<span class="mode-sub">Unbeatable</span></button>
+    </div>
+  </div>
+</section>
+
 <!-- GAME SCREEN -->
-<main id="game-screen">
+<main id="game-screen" class="hidden">
   <header class="game-header">
     <h1 class="game-title flicker small">Whisper</h1>
     <p class="game-subtitle">by Shiva Saini</p>
@@ -53,7 +70,10 @@
     <button class="cell" data-index="8"></button>
   </div>
 
-  <button id="restart-btn" class="btn-stone">Restart</button>
+  <div class="game-actions">
+    <button id="restart-btn" class="btn-stone">Restart</button>
+    <button id="change-mode-btn" class="btn-stone">Change Mode</button>
+  </div>
 </main>
 
 <!-- WIN / DRAW OVERLAY -->
