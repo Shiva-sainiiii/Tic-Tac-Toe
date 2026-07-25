@@ -4,9 +4,7 @@ A classic Tic-Tac-Toe, reimagined with a horror atmosphere: flickering
 title, blood-red vs bone-white marks, ambient sound, and a board that
 bleeds when someone wins.
 
-Live: https://shiva-sainiiii.github.io/Tic-Tac-Toe/
-*(update this link once the Vercel deploy is live)*
-
+Live: https://horrortictactoe.vercel.app/
 ## Preview
 
 ![Start screen](ss1.jpg)
