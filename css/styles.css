@@ -15,6 +15,33 @@
   --font-body: "JetBrains Mono", monospace;
 }
 
+/* ============================
+   Theme variants
+   Applied via data-theme on <html>
+============================ */
+
+/* Ash — grey, fog-heavy, low dread */
+html[data-theme="ash"] {
+  --bg-void: #0d0d0d;
+  --bg-panel: #1c1c1c;
+  --blood: #8a8a8a;
+  --blood-deep: #3a3a3a;
+  --bone: #e4e0da;
+  --bone-dim: #8c8c8c;
+  --glow: rgba(140, 140, 140, 0.45);
+}
+
+/* Void — near-black, minimal red, pure unease */
+html[data-theme="void"] {
+  --bg-void: #000000;
+  --bg-panel: #0c0c0c;
+  --blood: #4a0000;
+  --blood-deep: #1a0000;
+  --bone: #9a958d;
+  --bone-dim: #4a463f;
+  --glow: rgba(74, 0, 0, 0.4);
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -141,7 +168,57 @@ button {
   text-align: center;
 }
 
+#mute-toggle,
+#settings-toggle {
+  position: fixed;
+  top: 1.2rem;
+  z-index: 3;
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 50%;
+  border: 1px solid var(--bone-dim);
+  background: rgba(10, 9, 8, 0.6);
+  color: var(--bone);
+}
+
 #mute-toggle {
+  right: 1.2rem;
+}
+
+#settings-toggle {
+  right: 4.4rem;
+}
+
+/* ============================
+   Back arrow (mode-select & game screens)
+============================ */
+.back-btn {
+  position: fixed;
+  top: 1.2rem;
+  left: 1.2rem;
+  z-index: 3;
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 50%;
+  border: 1px solid var(--bone-dim);
+  background: rgba(10, 9, 8, 0.6);
+  color: var(--bone);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.back-btn:hover {
+  color: #fff;
+  border-color: var(--blood);
+  box-shadow: 0 0 14px var(--glow);
+}
+
+/* ============================
+   Inline settings gear (mode-select & game screens)
+============================ */
+.settings-toggle-inline {
   position: fixed;
   top: 1.2rem;
   right: 1.2rem;
@@ -152,6 +229,16 @@ button {
   border: 1px solid var(--bone-dim);
   background: rgba(10, 9, 8, 0.6);
   color: var(--bone);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.settings-toggle-inline:hover {
+  color: #fff;
+  border-color: var(--blood);
+  box-shadow: 0 0 14px var(--glow);
 }
 
 /* ============================
@@ -160,6 +247,87 @@ button {
 ============================ */
 .hidden:not(#start-screen) {
   display: none !important;
+}
+
+/* ============================
+   Settings panel
+============================ */
+#settings-panel {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.settings-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.8rem;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  border: 1px solid #3a332e;
+  border-radius: 10px;
+  background: var(--bg-panel);
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.7);
+  max-width: 90vw;
+}
+
+.theme-options {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.theme-swatch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid #3a332e;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.3);
+  color: var(--bone-dim);
+  padding: 0.8rem 1rem;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
+}
+
+.theme-swatch:hover {
+  color: var(--bone);
+  border-color: var(--bone-dim);
+}
+
+.theme-swatch.active {
+  color: var(--bone);
+  border-color: var(--blood);
+  box-shadow: 0 0 14px var(--glow);
+}
+
+.swatch-preview {
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.swatch-blood {
+  background: radial-gradient(circle at 35% 30%, #8b0000, #0a0908 75%);
+}
+
+.swatch-ash {
+  background: radial-gradient(circle at 35% 30%, #8a8a8a, #0d0d0d 75%);
+}
+
+.swatch-void {
+  background: radial-gradient(circle at 35% 30%, #4a0000, #000000 75%);
 }
 
 /* ============================
