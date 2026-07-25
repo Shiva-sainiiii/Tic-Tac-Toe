@@ -25,6 +25,10 @@
     <i class="fa-solid fa-volume-xmark"></i>
   </button>
 
+  <button id="settings-toggle" aria-label="Open settings">
+    <i class="fa-solid fa-gear"></i>
+  </button>
+
   <div class="start-content">
     <h1 class="game-title flicker">Whisper</h1>
     <p class="game-subtitle">a tic tac toe haunting &mdash; by Shiva Saini</p>
@@ -32,8 +36,40 @@
   </div>
 </section>
 
+<!-- SETTINGS PANEL (overlay, accessible from any screen) -->
+<div id="settings-panel" class="hidden">
+  <div class="settings-content">
+    <h2 class="mode-title">Choose Your Dread</h2>
+
+    <div class="theme-options">
+      <button class="theme-swatch" data-theme="blood" aria-label="Blood theme">
+        <span class="swatch-preview swatch-blood"></span>
+        Blood
+      </button>
+      <button class="theme-swatch" data-theme="ash" aria-label="Ash theme">
+        <span class="swatch-preview swatch-ash"></span>
+        Ash
+      </button>
+      <button class="theme-swatch" data-theme="void" aria-label="Void theme">
+        <span class="swatch-preview swatch-void"></span>
+        Void
+      </button>
+    </div>
+
+    <button id="close-settings-btn" class="btn-stone">Close</button>
+  </div>
+</div>
+
 <!-- MODE SELECT SCREEN -->
 <section id="mode-screen" class="hidden">
+  <button class="back-btn" id="back-to-start-btn" aria-label="Go back">
+    <i class="fa-solid fa-arrow-left"></i>
+  </button>
+
+  <button class="settings-toggle-inline" id="settings-toggle-mode" aria-label="Open settings">
+    <i class="fa-solid fa-gear"></i>
+  </button>
+
   <div class="mode-content">
     <h2 class="mode-title">Choose Your Fate</h2>
 
@@ -51,6 +87,14 @@
 
 <!-- GAME SCREEN -->
 <main id="game-screen" class="hidden">
+  <button class="back-btn" id="back-to-mode-btn" aria-label="Go back">
+    <i class="fa-solid fa-arrow-left"></i>
+  </button>
+
+  <button class="settings-toggle-inline" id="settings-toggle-game" aria-label="Open settings">
+    <i class="fa-solid fa-gear"></i>
+  </button>
+
   <header class="game-header">
     <h1 class="game-title flicker small">Whisper</h1>
     <p class="game-subtitle">by Shiva Saini</p>
