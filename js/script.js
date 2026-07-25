@@ -51,6 +51,16 @@ const scoreLabelOEl = document.getElementById("score-label-o");
 const scoreLabelXEl = document.getElementById("score-label-x");
 const resetScoreBtn = document.getElementById("reset-score-btn");
 
+const backToStartBtn = document.getElementById("back-to-start-btn");
+const backToModeBtn = document.getElementById("back-to-mode-btn");
+
+const settingsPanel = document.getElementById("settings-panel");
+const settingsToggle = document.getElementById("settings-toggle");
+const settingsToggleMode = document.getElementById("settings-toggle-mode");
+const settingsToggleGame = document.getElementById("settings-toggle-game");
+const closeSettingsBtn = document.getElementById("close-settings-btn");
+const themeSwatches = document.querySelectorAll(".theme-swatch");
+
 // ---- Sounds ----
 const sounds = {
   enter: new Audio("assets/audio/entersound.mp3"),
@@ -287,6 +297,20 @@ changeModeBtn.addEventListener("click", () => {
   modeScreen.classList.remove("hidden");
 });
 
+backToModeBtn.addEventListener("click", () => {
+  resetGame();
+  resetScore();
+  gameScreen.classList.add("hidden");
+  difficultyRow.classList.add("hidden");
+  modeScreen.classList.remove("hidden");
+});
+
+backToStartBtn.addEventListener("click", () => {
+  difficultyRow.classList.add("hidden");
+  modeScreen.classList.add("hidden");
+  startScreen.classList.remove("hidden");
+});
+
 startBtn.addEventListener("click", () => {
   startScreen.classList.add("hidden");
   modeScreen.classList.remove("hidden");
@@ -332,3 +356,51 @@ muteToggle.addEventListener("click", () => {
     sounds.bg.play();
   }
 });
+
+// ============================
+// Settings panel & themes
+// ============================
+function openSettings() {
+  settingsPanel.classList.remove("hidden");
+}
+
+function closeSettings() {
+  settingsPanel.classList.add("hidden");
+}
+
+[settingsToggle, settingsToggleMode, settingsToggleGame].forEach((btn) => {
+  btn.addEventListener("click", openSettings);
+});
+
+closeSettingsBtn.addEventListener("click", closeSettings);
+
+settingsPanel.addEventListener("click", (e) => {
+  if (e.target === settingsPanel) closeSettings();
+});
+
+function applyTheme(theme) {
+  document.documentElement.setAttribute("data-theme", theme);
+  themeSwatches.forEach((swatch) => {
+    swatch.classList.toggle("active", swatch.dataset.theme === theme);
+  });
+  try {
+    localStorage.setItem("whisper-theme", theme);
+  } catch (err) {
+    // localStorage unavailable (private mode, etc.) — theme just won't persist
+  }
+}
+
+themeSwatches.forEach((swatch) => {
+  swatch.addEventListener("click", () => applyTheme(swatch.dataset.theme));
+});
+
+// Load saved theme on startup, default to "blood"
+(function initTheme() {
+  let saved = "blood";
+  try {
+    saved = localStorage.getItem("whisper-theme") || "blood";
+  } catch (err) {
+    // ignore, fall back to default
+  }
+  applyTheme(saved);
+})();
